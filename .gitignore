@@ -16,7 +16,6 @@ eggs/
 .eggs/
 .idea/
 tests/.pytest_cache/
-lib/
 lib64/
 parts/
 sdist/
