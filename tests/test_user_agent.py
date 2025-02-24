@@ -54,6 +54,11 @@ class TestUserAgent:
         assert response.json()["device"] == expected_device, f"Expected device doesn't equals device '{response.json()['device']}'"
 
 
-# 2 user-agent, 'browser': 'Chrome' в ответе получаем 'browser': 'No'
-# 3 user-agent, 'platform': 'Googlebot' в ответе получаем 'platform': 'Unknown'
-# 5 user-agent, 'device': 'iPhone' в ответе получаем 'device': 'Unknown'
+# 2 'user-agent': 'Mozilla/5.0 (iPad; CPU OS 13_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/91.0.4472.77 Mobile/15E148 Safari/604.1'
+#    в ответе получаем 'browser': 'No'
+
+# 3 'user-agent': 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)'
+#    в ответе получаем 'platform': 'Unknown'
+
+# 5 'user-agent': 'Mozilla/5.0 (iPad; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1'
+#    в ответе получаем 'device': 'Unknown'
