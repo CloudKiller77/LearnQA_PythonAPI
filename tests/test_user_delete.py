@@ -30,6 +30,8 @@ class TestUserDelete(BaseCase):
         self.auth_sid = self.get_cookie(response2, "auth_sid")
         self.token = self.get_header(response2, "x-csrf-token")
 
+    @allure.tag("smoke")
+    @allure.severity("critical")
     @allure.description("This test delete user with wrong ID")
     def test_user_error_delete(self):
         data = {
@@ -55,6 +57,8 @@ class TestUserDelete(BaseCase):
         assert response2.json()["error"] == "Please, do not delete test users with ID 1, 2, 3, 4 or 5.", \
             "Something wrong with delete user"
 
+    @allure.tag("smoke")
+    @allure.severity("critical")
     @allure.description("This test successful delete user")
     def test_user_success_delete(self):
         # DELETE
@@ -73,6 +77,7 @@ class TestUserDelete(BaseCase):
         Assertions.assert_status_code(response3, 200)
         assert response4.content.decode("utf-8") == "User not found", f"Something wrong with get user"
 
+    @allure.severity("normal")
     @allure.description("This test delete user with authorization as other user")
     def test_user_error_delete_with_auth_other_user(self):
         # REGISTER

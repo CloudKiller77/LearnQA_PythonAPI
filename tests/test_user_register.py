@@ -42,6 +42,7 @@ class TestUserRegister(BaseCase):
     ]
 
     @allure.tag("smoke")
+    @allure.severity("critical")
     @allure.description("This test successful register user")
     def test_create_user_successful(self):
         data = self.prepare_registration_data()
@@ -52,6 +53,7 @@ class TestUserRegister(BaseCase):
         Assertions.assert_json_has_key(response, "id")
 
     @allure.tag("smoke")
+    @allure.severity("critical")
     @allure.description("This test register user with existing email")
     def test_create_user_with_existing_email(self):
         email = 'vinkotov@example.com'
@@ -64,6 +66,7 @@ class TestUserRegister(BaseCase):
             "utf-8") == f"Users with email '{email}' already exists", f"Unexpected response content {response.content}"
 
     @allure.tag("smoke")
+    @allure.severity("critical")
     @allure.description("This test register user with incorrect email")
     def test_create_user_with_incorrect_email(self):
         email = 'vinkotovexample.com'
@@ -89,6 +92,7 @@ class TestUserRegister(BaseCase):
         assert response.content.decode(
             "utf-8") == f"The following required params are missed: {parameters.get('response')}", f"Unexpected required params parameters '{response.content}'"
 
+    @allure.severity("normal")
     @allure.description("This test register user with short name")
     def test_create_user_with_short_name(self):
         firstName = 'l'
@@ -106,6 +110,7 @@ class TestUserRegister(BaseCase):
         assert response.content.decode(
             "utf-8") == "The value of 'firstName' field is too short", f"Unexpected response content {response.content}"
 
+    @allure.severity("normal")
     @allure.description("This test register user with long name more than 250 chars")
     def test_create_user_with_long_name(self):
         firstName = 'feoirgeoirgeprgjeprigjoerigoeirgoeirjgoeirgjoeigoeirgeoirgneorgneorgjperojgwpojrgowirjgiehgoeirgwpjwlfkwe;fmw;efw;egwogoepgojrgiojeoigjeorjgpwrogjeiorjgioehrgpwrjgwoirhgjoehrgoeijrgoiehrgpoejrpgoejprgjeporgjeprogjeporgjeporgjeporgjeporgeprojgpejgpoowefw'

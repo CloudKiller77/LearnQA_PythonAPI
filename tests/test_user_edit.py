@@ -30,6 +30,8 @@ class TestUserEdit(BaseCase):
         self.auth_sid = self.get_cookie(response2, "auth_sid")
         self.token = self.get_header(response2, "x-csrf-token")
 
+    @allure.tag("smoke")
+    @allure.severity("critical")
     @allure.description("This test successful edit new user and successful get user data")
     def test_edit_just_created_user(self):
         # EDIT
@@ -58,6 +60,8 @@ class TestUserEdit(BaseCase):
             "Wrong name after user edit!!!"
         )
 
+    @allure.tag("smoke")
+    @allure.severity("critical")
     @allure.description("This test edit new user without authorization")
     def test_edit_user_data_without_auth(self):
         # EDIT
@@ -72,6 +76,7 @@ class TestUserEdit(BaseCase):
         Assertions.assert_json_has_key(response, "error")
         assert response.json()["error"] == "Auth token not supplied", "Something wrong with edit user"
 
+    @allure.severity("normal")
     @allure.description("This test edit new user with authorization as other user")
     def test_edit_user_with_auth_other_user(self):
         register_data = self.prepare_registration_data()
@@ -107,6 +112,7 @@ class TestUserEdit(BaseCase):
         Assertions.assert_json_has_key(response3, "error")
         assert response3.json()["error"] == "This user can only edit their own data.", "Something wrong with edit user"
 
+    @allure.severity("normal")
     @allure.description("This test edit new user with wrong email")
     def test_edit_user_with_wrong_email(self):
         # EDIT
@@ -123,6 +129,7 @@ class TestUserEdit(BaseCase):
         Assertions.assert_json_has_key(response, "error")
         assert response.json()["error"] == "Invalid email format", "Something wrong with edit user"
 
+    @allure.severity("normal")
     @allure.description("This test edit new user with short user name")
     def test_edit_user_with_short_first_name(self):
         # EDIT

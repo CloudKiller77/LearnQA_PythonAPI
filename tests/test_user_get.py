@@ -20,6 +20,8 @@ class TestUserGet(BaseCase):
         self.token = self.get_header(response1, "x-csrf-token")
         self.user_id_auth = self.get_json_value(response1, "user_id")
 
+    @allure.tag("smoke")
+    @allure.severity("critical")
     @allure.description("This test try to get user data without authorization")
     def test_user_get_no_auth(self):
         response = MyRequests.get("user/2")
@@ -29,6 +31,7 @@ class TestUserGet(BaseCase):
         Assertions.assert_json_has_no_key(response, 'lastName')
         Assertions.assert_json_has_no_key(response, 'email')
 
+    @allure.severity("normal")
     @allure.description("This test get user data successful")
     def test_get_user_details_auth_as_same_user(self):
         response2 = MyRequests.get(
@@ -40,6 +43,7 @@ class TestUserGet(BaseCase):
         expected_fields = ["username", "firstName", "lastName", "email"]
         Assertions.assert_json_has_keys(response2, expected_fields)
 
+    @allure.severity("normal")
     @allure.description("This test try to get user data authorized as other user")
     def test_get_user_details_auth_as_other_user(self):
         response2 = MyRequests.get(

@@ -4,6 +4,7 @@ from lib.assertions import Assertions
 from lib.my_requests import MyRequests
 import allure
 
+
 @allure.epic("Authorization epic")
 class TestUserAuth(BaseCase):
     exclude_params = [
@@ -24,6 +25,7 @@ class TestUserAuth(BaseCase):
         self.user_id_auth = self.get_json_value(response1, "user_id")
 
     @allure.tag("smoke")
+    @allure.severity("critical")
     @allure.description("This test successfully authorize user by email and password")
     def test_user_auth(self):
 
@@ -41,6 +43,7 @@ class TestUserAuth(BaseCase):
         )
 
     @allure.tag("smoke")
+    @allure.severity("critical")
     @allure.description("This test error authorize user without token and cookies")
     @pytest.mark.parametrize('condition', exclude_params)
     def test_negative_auth(self, condition):
